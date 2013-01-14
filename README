@@ -1,3 +1,7 @@
+*******UPDATED TO WORK WITH NEW VERSIONS OF XCODE (SANBOXED VERSIONS) by MPOW *******
+
+that can be useful for decrypt App binaries that are encrypted, for example to Class-Dump it and make tweak!
+
 Dumps decrypted iPhone Applications to a file - better solution than those GDB scripts for non working GDB versions
 (C) Copyright 2011 Stefan Esser
 
