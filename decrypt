@@ -1,0 +1,79 @@
+ #!/bin/bash 
+
+	function dec {
+			echo
+	    echo decrypting...
+	    echo
+	    DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib $1 mach-o decryption dumper
+	    echo 
+	    
+	   }
+	   
+	function dump {
+		if [ ! -e /usr/bin/class-dump ]; then
+		echo
+		echo "Cannot find Class Dump install it to use this option"
+		echo
+		exit 1
+		fi
+			echo
+			echo decrypting...
+			DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib $1 mach-o decryption dumper
+			echo
+	    echo dumping...
+	    echo "Creating new dir ./headers"
+	    echo dumping...
+		mkdir headers
+	    class-dump -H *.decrypted -o ./headers
+	    echo 
+	   }
+	   
+	function app {
+	echo "Locating $1 ..."
+	tempLoc=$(find /var/mobile/Applications -iname $1.app)
+	dir=$(dirname "$tempLoc")
+	echo $tempLoc
+	echo
+	echo "Do you want to Exit (e), Decrypt (d), Decrypt and Class-Dump (dump)??"
+	read CHOOSE
+	case $CHOOSE in
+	
+	d)
+		dec $tempLoc/$1
+		;;
+	dump)
+		dump $tempLoc/$1
+		;;
+	*)
+		;;
+	esac
+	}
+
+
+	case $1 in
+	 
+	-dump) 
+		dump $2
+		;;
+	
+	
+	''|-h) 
+		echo Usage : decrypt [option] [file]
+		
+		echo -e '\t -h \t\tto Help'
+		echo -e '\t -app [AppName]\tto Find an App Path'
+		echo -e '\t [file]\t\tto decrypt'
+		echo -e '\t -dump [file] \tto decrypt and classdump the file'
+		echo
+			;;
+	 
+	 -app) 
+	 
+		app $2
+		echo $dir
+		;;
+	 *)
+			dec $1
+		;;
+	 esac
+	 

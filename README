@@ -1,4 +1,11 @@
-*******UPDATED TO WORK WITH NEW VERSIONS OF XCODE (SANBOXED VERSIONS) by MPOW *******
+*******UPDATED TO WORK WITH NEW VERSIONS OF XCODE (SANBOXED VERSIONS), IOS 6 SDK by MPOW AND ADDED A BASH SCRIPT *******
+-------------------------------------------
+I have added a bash script at the original version to make easier the decrypting and the dumping. 
+USAGE:
+decrypt [FILE] -> decrypt
+decrypt -dump [FILE] -> decrypt and dump
+decrypt -app [name of the bundle] -> Find the path of the app and then ask what to do (dump or decrypt).
+--------------------------------------------
 
 that can be useful for decrypt App binaries that are encrypted, for example to Class-Dump it and make tweak!
 
