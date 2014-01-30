@@ -4,8 +4,8 @@ dumpdecrypted
 This fork of dumpdecrypted contains a CLI which massively improves the ease of use of dumpdecrypted. A complete package is available to download in Cydia from my repo: <a>http://j-gessner.de/repo</a>. Once installed, run `dumpdecryped` from the command line to start decrypting binaries. The CLI also supports decrypting based on an App's name and class dumping a decrypted binary. Credits go to MPow for these features!
 
 
-
-
+<p>
+<p>
 Original Readme:
 
 Dumps decrypted iPhone Applications to a file - better solution than those GDB scripts for non working GDB versions
