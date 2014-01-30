@@ -1,13 +1,12 @@
-*******UPDATED TO WORK WITH NEW VERSIONS OF XCODE (SANBOXED VERSIONS), IOS 6 SDK by MPOW AND ADDED A BASH SCRIPT *******
--------------------------------------------
-I have added a bash script at the original version to make easier the decrypting and the dumping. 
-USAGE:
-decrypt [FILE] -> decrypt
-decrypt -dump [FILE] -> decrypt and dump
-decrypt -app [name of the bundle] -> Find the path of the app and then ask what to do (dump or decrypt).
---------------------------------------------
+dumpdecrypted
+=============
 
-that can be useful for decrypt App binaries that are encrypted, for example to Class-Dump it and make tweak!
+This fork of dumpdecrypted contains a CLI which massively improves the ease of use of dumpdecrypted. A complete package is available to download in Cydia from my repo: <a>http://j-gessner.de/repo</a>. Once installed, run `dumpdecryped` from the command line to start decrypting binaries. The CLI also supports decrypting based on an App's name and class dumping a decrypted binary. Credits go to MPow for these features!
+
+
+
+
+Original Readme:
 
 Dumps decrypted iPhone Applications to a file - better solution than those GDB scripts for non working GDB versions
 (C) Copyright 2011 Stefan Esser
