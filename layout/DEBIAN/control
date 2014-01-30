@@ -5,4 +5,4 @@ Depends: class-dump
 Architecture: iphoneos-arm
 Description: dumpdecrypted by Stefan Esser. Usage: run dumpdecrypted from the command line. DISCLAIMER: This tool is only meant for security research purposes, not for application crackers. Copyright 2011 Stefan Esser.
 Author: Jonas Gessner
-Section: System
+Section: Development
