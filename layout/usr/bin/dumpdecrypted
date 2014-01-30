@@ -2,9 +2,9 @@
 
 	function dec {
 			echo
-	    echo decrypting...
+	    echo Decrypting...
 	    echo
-	    DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib $1 mach-o decryption dumper
+	    DYLD_INSERT_LIBRARIES=/usr/lib/dumpdecrypted.dylib $1 mach-o decryption dumper
 	    echo 
 	    
 	   }
@@ -17,12 +17,12 @@
 		exit 1
 		fi
 			echo
-			echo decrypting...
-			DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib $1 mach-o decryption dumper
+			echo Decrypting...
+			DYLD_INSERT_LIBRARIES=/usr/lib/dumpdecrypted.dylib $1 mach-o decryption dumper
 			echo
-	    echo dumping...
-	    echo "Creating new dir ./headers"
-	    echo dumping...
+	    echo Dumping...
+	    echo "Creating new directory headers"
+	    echo Dumping...
 		mkdir headers
 	    class-dump -H *.decrypted -o ./headers
 	    echo 
@@ -34,7 +34,7 @@
 	dir=$(dirname "$tempLoc")
 	echo $tempLoc
 	echo
-	echo "Do you want to Exit (e), Decrypt (d), Decrypt and Class-Dump (dump)??"
+	echo "Exit (e), Decrypt (d) or Decrypt and Class-Dump (dump)?"
 	read CHOOSE
 	case $CHOOSE in
 	

@@ -1,22 +1,15 @@
-BIN = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin
+ARCHS = armv7 armv7s arm64
 
-GCC_BIN = $(BIN)/gcc
-#GCC = $(GCC_BASE) -arch armv6
-GCC = $(GCC_BASE) -arch armv7
-GCC_UNIVERSAL = $(GCC_BASE) -arch armv7
-GCC_NATIVE = gcc
-SDK=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/
+TARGET = iphone:clang:latest:5.0
 
-CFLAGS = 
-GCC_BASE = $(GCC_BIN) -Os $(CFLAGS) -Wimplicit -isysroot $(SDK) -F$(SDK)System/Library/Frameworks -F$(SDK)System/Library/PrivateFrameworks
+THEOS_BUILD_DIR = Packages
 
-all: dumpdecrypted.dylib
+FINALPACKAGE = 1
 
-dumpdecrypted.dylib: dumpdecrypted.o 
-	$(GCC_UNIVERSAL) -dynamiclib -o $@ $^
+include theos/makefiles/common.mk
 
-%.o: %.c
-	$(GCC_UNIVERSAL) -dynamiclib -c -o $@ $< 
+LIBRARY_NAME = dumpdecrypted
+dumpdecrypted_CFLAGS = -fno-objc-arc
+dumpdecrypted_FILES = dumpdecrypted.c
 
-clean:
-	rm -f *.o dumpdecrypted.dylib
+include $(THEOS_MAKE_PATH)/library.mk

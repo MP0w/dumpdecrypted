@@ -49,7 +49,6 @@ void dumptofile(int argc, const char **argv, const char **envp, const char **app
 	struct encryption_info_command *eic;
 	struct fat_header *fh;
 	struct fat_arch *arch;
-	struct mach_header *mh;
 	char buffer[1024];
 	char rpath[4096],npath[4096]; /* should be big enough for PATH_MAX */
 	unsigned int fileoffs = 0, off_cryptid = 0, restsize;
