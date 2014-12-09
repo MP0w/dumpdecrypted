@@ -32,7 +32,7 @@ function dump
 function app
 {
 	echo "Locating $1 ..."
-	tempLoc=$(find /var/mobile/Applications -maxdepth 2 -iname $1.app)
+	tempLoc=$(find /var/mobile/Containers/Bundle/Application -maxdepth 2 -iname $1.app)
 	dir=$(dirname "$tempLoc")
 	echo $tempLoc
 	echo
