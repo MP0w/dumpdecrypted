@@ -8,34 +8,34 @@ This fork of dumpdecrypted contains a CLI which massively improves the ease of u
 Original Readme:
 
 Dumps decrypted iPhone Applications to a file - better solution than those GDB scripts for non working GDB versions
-(C) Copyright 2011 Stefan Esser<br>
+(C) Copyright 2011-2014 Stefan Esser
 
 
-Compile:<br>
+Compile:
 
-First adjust the Makefile if you have a different iOS SDK installed.<br>
+First adjust the Makefile if you have a different iOS SDK installed.
 
-And then just: make<br>
-<br>
+And then just: make
 
-Usage:<br>
 
-iPod:~ root# DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Applications/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/Scan.app/Scan<br>
-mach-o decryption dumper<br>
+Usage:
 
-DISCLAIMER: This tool is only meant for security research purposes, not for application crackers.<br>
+iPod:~ root# DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Applications/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/Scan.app/Scan
+mach-o decryption dumper
 
-[+] Found encrypted data at address 00002000 of length 1826816 bytes - type 1.<br>
-[+] Opening /private/var/mobile/Applications/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/Scan.app/Scan for reading.<br>
-[+] Reading header<br>
-[+] Detecting header type<br>
-[+] Executable is a FAT image - searching for right architecture<br>
-[+] Correct arch is at offset 2408224 in the file<br>
-[+] Opening Scan.decrypted for writing.<br>
-[-] Failed opening. Most probably a sandbox issue. Trying something different.<br>
-[+] Opening /private/var/mobile/Applications/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/tmp/Scan.decrypted for writing.<br>
-[+] Copying the not encrypted start of the file<br>
-[+] Dumping the decrypted data into the file<br>
-[+] Copying the not encrypted remainder of the file<br>
-[+] Closing original file<br>
-[+] Closing dump file<br>
+DISCLAIMER: This tool is only meant for security research purposes, not for application crackers.
+
+[+] Found encrypted data at address 00002000 of length 1826816 bytes - type 1.
+[+] Opening /private/var/mobile/Applications/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/Scan.app/Scan for reading.
+[+] Reading header
+[+] Detecting header type
+[+] Executable is a FAT image - searching for right architecture
+[+] Correct arch is at offset 2408224 in the file
+[+] Opening Scan.decrypted for writing.
+[-] Failed opening. Most probably a sandbox issue. Trying something different.
+[+] Opening /private/var/mobile/Applications/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/tmp/Scan.decrypted for writing.
+[+] Copying the not encrypted start of the file
+[+] Dumping the decrypted data into the file
+[+] Copying the not encrypted remainder of the file
+[+] Closing original file
+[+] Closing dump file

@@ -1,7 +1,7 @@
 /*
 
 Dumps decrypted iPhone Applications to a file - better solution than those GDB scripts for non working GDB versions
-(C) Copyright 2011 Stefan Esser
+(C) Copyright 2011-2014 Stefan Esser
 
 iPod:~ root# DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Applications/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/Scan.app/Scan
 mach-o decryption dumper
@@ -58,13 +58,21 @@ void dumptofile(int argc, const char **argv, const char **envp, const char **app
 	printf("mach-o decryption dumper\n\n");
 		
 	printf("DISCLAIMER: This tool is only meant for security research purposes, not for application crackers.\n\n");
+	
+	/* detect if this is a arm64 binary */
+	if (pvars->mh->magic == MH_MAGIC_64) {
+		lc = (struct load_command *)((unsigned char *)pvars->mh + sizeof(struct mach_header_64));
+		printf("[+] detected 64bit ARM binary in memory.\n");
+	} else { /* we might want to check for other errors here, too */
+		lc = (struct load_command *)((unsigned char *)pvars->mh + sizeof(struct mach_header));
+		printf("[+] detected 32bit ARM binary in memory.\n");
+	}
+	
 	/* searching all load commands for an LC_ENCRYPTION_INFO load command */
-	lc = (struct load_command *)((unsigned char *)pvars->mh + sizeof(struct mach_header));
-		
 	for (i=0; i<pvars->mh->ncmds; i++) {
 		/*printf("Load Command (%d): %08x\n", i, lc->cmd);*/
 		
-		if (lc->cmd == LC_ENCRYPTION_INFO) {
+		if (lc->cmd == LC_ENCRYPTION_INFO || lc->cmd == LC_ENCRYPTION_INFO_64) {
 			eic = (struct encryption_info_command *)lc;
 			
 			/* If this load command is present, but data is not crypted then exit */
@@ -112,7 +120,7 @@ void dumptofile(int argc, const char **argv, const char **envp, const char **app
 					printf("[-] Could not find correct arch in FAT image\n");
 					_exit(1);
 				}
-			} else if (fh->magic == MH_MAGIC) {
+			} else if (fh->magic == MH_MAGIC || fh->magic == MH_MAGIC_64) {
 				printf("[+] Executable is a plain MACH-O image\n");
 			} else {
 				printf("[-] Executable is of unknown type\n");
@@ -158,7 +166,7 @@ void dumptofile(int argc, const char **argv, const char **envp, const char **app
 			}
 			
 			/* calculate address of beginning of crypted data */
-			n = fileoffs + eic->cryptoff - 0x1000; /* we assume header is normally at 0x1000 */
+			n = fileoffs + eic->cryptoff;
 			
 			restsize = lseek(fd, 0, SEEK_END) - n - eic->cryptsize;			
 			lseek(fd, 0, SEEK_SET);
@@ -183,7 +191,7 @@ void dumptofile(int argc, const char **argv, const char **envp, const char **app
 			
 			/* now write the previously encrypted data */
 			printf("[+] Dumping the decrypted data into the file\n");
-			r = write(outfd, (unsigned char *)pvars->mh + eic->cryptoff - 0x1000, eic->cryptsize);
+			r = write(outfd, (unsigned char *)pvars->mh + eic->cryptoff, eic->cryptsize);
 			if (r != eic->cryptsize) {
 				printf("[-] Error writing file\n");
 				_exit(1);
